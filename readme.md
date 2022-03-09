@@ -7,3 +7,4 @@
 
 -   lembre-se de dar o comando '**npm i**' no diretório raíz do projeto antes de executar o código na produção
 
+-   O servidor irá rodar na porta 3000
