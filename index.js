@@ -6,7 +6,7 @@ const start = async () => {
     await hydrateDbWithApiData()
 }
 
-initializeDependencies = () => {
+const initializeDependencies = () => {
     Odm = new Odm()
     UniversitiesPiker = new UniversitiesPiker()
 }
