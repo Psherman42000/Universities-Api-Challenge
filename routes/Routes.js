@@ -1,14 +1,14 @@
 'use strict'
 module.exports = class Routes {
   constructor() {
-    this._UniversitiesManeger = require('../controllers/universities-manager/UniversitiesManager')
+    this._universitiesManeger = require('../controllers/universities-manager/UniversitiesManager')
     this._express = require('express')
     this._router = this._express.Router()
     this._app
   }
 
   initializeServer = (model) => {
-    this._UniversitiesManeger = new this._UniversitiesManeger(model)
+    this._universitiesManeger = new this._universitiesManeger(model)
     this._app = this._express()
     this._loadMiddlewares()
     this._loadRoutes()
@@ -58,10 +58,11 @@ module.exports = class Routes {
 
   _loadRoutesToSearch = () => {
     this._router.get('', async (req, res) => {
-      if(req.query === {}) {
-        res.send({todas: '...'})
+      const {country, allRecords} = req.query
+      if(country) {
+        return res.send(await this._universitiesManeger.getUniversitiesFromCountry({ country, allRecords }))
       }
-      res.send(await this.getUniversitiesFromCountry(req.query.country))
+      return res.send(await this._universitiesManeger.getUniversities({ allRecords }))
     })
   }
 

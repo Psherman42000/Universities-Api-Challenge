@@ -5,7 +5,7 @@ let Routes = require('./routes/Routes')
 const start = async () => {
     initializeDependencies()
     await hydrateDbWithApiData()
-    initializeServer()
+    await initializeServer()
 }
 
 const initializeDependencies = () => {
@@ -28,8 +28,8 @@ const hydrateDbWithApiData = async () => {
     console.log('[INFO] Database hydrated sucessfully')
 }
 
-const initializeServer = () => {
-    Routes.initializeServer(Odm.getModel())
+const initializeServer = async () => {
+    Routes.initializeServer(await Odm.getModel())
 }
 
 start()

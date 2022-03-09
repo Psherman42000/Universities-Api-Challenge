@@ -64,7 +64,7 @@ module.exports = class Odm {
     return await model.create(data)
   }
 
-  getModel = () => {
+  getModel = async () => {
     await this.initializeDb()
     return this._model ? this._model : this._createModel()
   }
