@@ -14,6 +14,7 @@ class UniversitiesPiker {
       const countryUnivertsities = await this._axios.get(`${this._endpoint}${countryName}`)
       return univertsities[countryName] = countryUnivertsities.data
     }))
+    return univertsities
   } 
 }
 
