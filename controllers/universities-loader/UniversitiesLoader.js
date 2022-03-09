@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = class UniversitiesPiker {
+module.exports = class UniversitiesLoader {
   constructor() {
     this._axios = require("axios")
     this._endpoint = 'http://universities.hipolabs.com/search?country=',

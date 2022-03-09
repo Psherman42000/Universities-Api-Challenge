@@ -1,12 +1,14 @@
 'use strict'
 module.exports = class Routes {
   constructor() {
+    this._UniversitiesManeger = require('../controllers/universities-manager/UniversitiesManager')
     this._express = require('express')
     this._router = this._express.Router()
     this._app
   }
 
-  initializeServer = (params = {}) => {
+  initializeServer = (model) => {
+    this._UniversitiesManeger = new this._UniversitiesManeger(model)
     this._app = this._express()
     this._loadMiddlewares()
     this._loadRoutes()
@@ -29,39 +31,42 @@ module.exports = class Routes {
   }
 
   _loadRestApiRoutes = () => {
-    this._getRoutesToCreations()
-    this._getDeleteToDeletions()
-    this._getRoutesToUpdates()
-    this._getRoutesToSearch()
+    this._loadRoutesToCreations()
+    this._loadDeleteToDeletions()
+    this._loadRoutesToUpdates()
+    this._loadRoutesToSearch()
     this._app.use('/universities', this._router)
   }
 
-  _getRoutesToCreations = () => {
+  _loadRoutesToCreations = () => {
     this._router.post('', async (req, res) => {
-          
+      
     })
   }
 
-  _getDeleteToDeletions = () => {
+  _loadDeleteToDeletions = () => {
     this._router.delete('', async (req, res) => {
-          
+      
     })
   }
 
-  _getRoutesToUpdates = () => {
+  _loadRoutesToUpdates = () => {
     this._router.put('', async (req, res) => {
           
     })
   }
 
-  _getRoutesToSearch = () => {
-      this._router.get('', async (req, res) => {
-
-      })
+  _loadRoutesToSearch = () => {
+    this._router.get('', async (req, res) => {
+      if(req.query === {}) {
+        res.send({todas: '...'})
+      }
+      res.send(await this.getUniversitiesFromCountry(req.query.country))
+    })
   }
 
   _startServer = () => {
-    const serverPort = 3000
+    const serverPort = 3002
     return this._app.listen(serverPort, () => {
       console.log(`[INFO] Server listening on port ${serverPort}!`)
     })

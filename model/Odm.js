@@ -12,7 +12,10 @@ module.exports = class Odm {
     if(this._connected) return
     console.log('[INFO] Connecting with Database')
     try{
-      await this._mongo.connect(this._dbUri)
+      await this._mongo.connect(this._dbUri,{
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      })
     }catch(error){
       console.log('[ERROR] Connection with Database Failed')
       throw error
@@ -59,6 +62,11 @@ module.exports = class Odm {
     await this.initializeDb()
     const model = this._model ? this._model : this._createModel()
     return await model.create(data)
-  } 
+  }
+
+  getModel = () => {
+    await this.initializeDb()
+    return this._model ? this._model : this._createModel()
+  }
 
 }
