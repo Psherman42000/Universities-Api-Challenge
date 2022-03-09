@@ -1,6 +1,6 @@
 'use strict'
 
-class UniversitiesPiker {
+module.exports = class UniversitiesPiker {
   constructor() {
     this._axios = require("axios")
     this._endpoint = 'http://universities.hipolabs.com/search?country=',
@@ -8,14 +8,12 @@ class UniversitiesPiker {
   }
 
   getUniversitiesFromApi = async () => {
-    const univertsities = {}
+    const univertsities = []
     const { countrys } = this._countrysData
     await Promise.all(countrys.map(async (countryName) => {
       const countryUnivertsities = await this._axios.get(`${this._endpoint}${countryName}`)
-      return univertsities[countryName] = countryUnivertsities.data
+      return univertsities.push(...countryUnivertsities.data)
     }))
     return univertsities
   } 
 }
-
-module.exports = UniversitiesPiker

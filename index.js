@@ -7,5 +7,8 @@ const start = async () => {
 
 const hydrateDbWithApiData = async () => {
     if(await Odm.alreadyHydrated()) return
-    
+    const universities = await UniversitiesPiker.getUniversitiesFromApi()
+    return await Promise.all(universities.map(async (university) => {
+        await Odm.crate(university)
+    }))
 }
