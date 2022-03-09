@@ -1,7 +1,8 @@
 'use strict'
+
 module.exports = class Odm {
-  constructor(api) {
-    this._model = 
+  constructor() {
+    this._mongo = require('mongoose')
     this.connect = this._api().connect
     this.connection = this._api().connection
     this.disconnect = this._api().disconnect

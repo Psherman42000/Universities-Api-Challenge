@@ -12,3 +12,5 @@ const hydrateDbWithApiData = async () => {
         await Odm.crate(university)
     }))
 }
+
+start()
