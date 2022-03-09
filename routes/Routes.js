@@ -2,6 +2,7 @@
 module.exports = class Routes {
   constructor() {
     this._express = require('express')
+    this._router = this._express.Router()
     this._app
   }
 
@@ -28,10 +29,35 @@ module.exports = class Routes {
   }
 
   _loadRestApiRoutes = () => {
-    this._app.use('/universities', this._getRoutesToCreations())
-    this._app.use('/universities', this._payment.getDeleteToDeletions())
-    this._app.use('/universities', this._appEngineEntrance.getRoutesToUpdates())
-    this._app.use('/universities', this._signatureCanvas.getRoutesToSearch())
+    this._getRoutesToCreations()
+    this._getDeleteToDeletions()
+    this._getRoutesToUpdates()
+    this._getRoutesToSearch()
+    this._app.use('/universities', this._router)
+  }
+
+  _getRoutesToCreations = () => {
+    this._router.post('', async (req, res) => {
+          
+    })
+  }
+
+  _getDeleteToDeletions = () => {
+    this._router.delete('', async (req, res) => {
+          
+    })
+  }
+
+  _getRoutesToUpdates = () => {
+    this._router.put('', async (req, res) => {
+          
+    })
+  }
+
+  _getRoutesToSearch = () => {
+      this._router.get('', async (req, res) => {
+
+      })
   }
 
   _startServer = () => {
