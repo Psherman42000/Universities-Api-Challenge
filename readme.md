@@ -19,3 +19,4 @@
 
 -   **EXECUTANDO**
     -   Para iniciar o servidor de o comando '**node index.js**' na pasta raiz do projeto
+    -   (OBS: não se esqueça de executar o **npm i** antes) 
