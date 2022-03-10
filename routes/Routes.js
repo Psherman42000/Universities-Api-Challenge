@@ -90,11 +90,8 @@ module.exports = class Routes {
   _loadGetRoute = () => {
     this._router.get('', async (req, res) => {
       try{
-        const {country, allRecords} = req.query
-        if(country) {
-          return res.send(await this._universitiesManeger.getUniversitiesFromCountry({ country, allRecords }))
-        }
-        return res.send(await this._universitiesManeger.getUniversities({ allRecords }))
+        const { country, allRegistries, page, registriesPerPage } = req.query
+        return res.send(await this._universitiesManeger.getUniversities({ country, allRegistries, page, registriesPerPage }))
       } catch (error) {
         const response = {
           error,

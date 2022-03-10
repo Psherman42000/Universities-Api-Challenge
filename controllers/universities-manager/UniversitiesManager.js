@@ -5,16 +5,42 @@ module.exports = class UniversitiesManager {
     this._model = model
   }
 
-  getUniversities = async ({ allRecords }) => {
-    let queryResult
-    if(allRecords)
-      queryResult = await this._model.find({})
-    else
-      queryResult = await this._model.find({}).limit(20)
+  getUniversities = async ({ country, allRegistries, page = 0, registriesPerPage = 20 }) => {
+    const {offset, limit} = this._getPaginationParams({page, registriesPerPage, allRegistries})
+    if(country) return this._getUniversitiesFromCountry({ country, offset, limit })
+    const queryResult = await this._model.find({}).skip(offset).limit(limit)
     return queryResult.map(university => {
       return this._getDataTransferObject(university)
     })
   }
+  
+  _getPaginationParams = ({page, registriesPerPage, allRegistries}) => {
+    let offset
+    let limit
+    if(allRegistries){
+      offset = 0
+      limit = 0
+    }else{
+      offset = Number(page * registriesPerPage)
+      limit = Number(registriesPerPage) > 20 ? 20 : Number(registriesPerPage)
+    }
+    return {offset, limit}
+  }
+
+  _getUniversitiesFromCountry = async ({ country, offset, limit }) => {
+    const queryResult = await this._model.find(this._getInsensitiveQuery(country)).skip(offset).limit(limit)
+    if(result.length === 0) return {info: '0 Documents finded for this country'}
+    return queryResult.map(university => {
+      return this._getDataTransferObject(university)
+    })
+  }
+
+  _getInsensitiveQuery = (param) => ({
+    country: {
+      "$regex": param,
+      "$options": "i"
+    }
+  })
 
   _getDataTransferObject = (university) => {
     const dataTransferObject = {
@@ -29,27 +55,15 @@ module.exports = class UniversitiesManager {
   getUniversitieById = async (id) => {
     const result = await this._model.find({_id: id})
     if(result.length === 0) return {info: '0 Documents finded for this ID'}
-    return this._getDataTransferObject(result[0])
+    return this._deleteUnusedFields(result[0])
   }
 
-  getUniversitiesFromCountry = async ({ country, allRecords }) => {
-    let queryResult
-    if(allRecords)
-      queryResult = await this._model.find(this._getInsensitiveQuery(country))
-    else
-      queryResult = await this._model.find(this._getInsensitiveQuery(country)).limit(20)
-    if(result.length === 0) return {info: '0 Documents finded for this country'}
-    return queryResult.map(university => {
-      return this._getDataTransferObject(university)
-    })
+  _deleteUnusedFields = (universityData) => {
+    delete universityData.createdAt
+    delete universityData.updatedAt
+    delete universityData.__v
+    return universityData
   }
-
-  _getInsensitiveQuery = (param) => ({
-    country: {
-      "$regex": param,
-      "$options": "i"
-    }
-  })
 
   deleteUniversity = async (id) => {
     const result = await this._model.findByIdAndDelete(id)

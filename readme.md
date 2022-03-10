@@ -13,8 +13,12 @@
 
 
 -   **API REST INFOS**
-    -   por padrão o método GET está limitado a retornar somente 20 registros, caso queira pegar todos, é necessesário passar o atributo **allRecords** como um [parametro de query](https://guides.emberjs.com/release/routing/query-params/) na url, 
-    -   o atributo **allRecords** recebe um valor booleano
+    -   **PAGINAÇÃO INFOS**
+        -   ATENÇÃO 
+            -   por padrão o método GET está limitado a retornar até 20 registros, caso queira pegar todos, é necessesário passar o atributo **allRegistries** como um [parametro de query](https://guides.emberjs.com/release/routing/query-params/) na url, 
+                -   o atributo **allRegistries** recebe um valor booleano
+            -   para definir o número da página é nessário passar o atributo **page** como um [parametro de query](https://guides.emberjs.com/release/routing/query-params/) na url, por padrão será retornado a página 1
+            -   para definir o número de registros retornados por página é nessário passar o atributo **registriesPerPage** como um [parametro de query](https://guides.emberjs.com/release/routing/query-params/) na url, por padrão será retornado 20 registros
     -   O servidor irá rodar na porta 3001, mas caso necessite trocar você pode ser editar a porta em './routes/Routes.js'
 
 -   **EXECUTANDO**
