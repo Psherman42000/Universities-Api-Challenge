@@ -17,7 +17,7 @@ const initializeDependencies = () => {
 const hydrateDbWithApiData = async () => {
     await Odm.initializeDb()
     if(await Odm.alreadyHydrated()) return
-    console.log('[INFO] first time runnig server, hydrating database with universities data...')
+    console.log('[INFO] first time runnig server, please await database be hydrated with universities data...')
     try{
         const universities = await UniversitiesLoader.getUniversitiesFromApi()
         await Odm.insertMany(universities)
