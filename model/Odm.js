@@ -27,7 +27,7 @@ module.exports = class Odm {
   alreadyHydrated = async () => {
     await this.initializeDb()
     const model = this._model ? this._model : this._createModel()
-      const result = await model.findOne({})
+    const result = await model.findOne({})
     if(!result) return false
     return true
   }

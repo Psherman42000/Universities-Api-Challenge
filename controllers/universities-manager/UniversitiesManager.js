@@ -63,12 +63,12 @@ module.exports = class UniversitiesManager {
   }
 
   _universityAlreadyExists = async (desiredObj) => {
-    const result = await this._model.find(this._getMutifieldInsensitiveQuery(desiredObj))
+    const result = await this._model.find(this._getMultifieldInsensitiveQuery(desiredObj))
     if(result.length === 0) return false
     return true
   }
 
-  _getMutifieldInsensitiveQuery = (desiredObj) => ({
+  _getMultifieldInsensitiveQuery = (desiredObj) => ({
     name: {
       "$regex": desiredObj.name,
       "$options": "i"

@@ -121,7 +121,7 @@ module.exports = class Routes {
   }
 
   _startServer = () => {
-    const serverPort = 3002
+    const serverPort = 3001
     return this._app.listen(serverPort, () => {
       console.log(`[INFO] Server listening on port ${serverPort}!`)
     })
