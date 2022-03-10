@@ -1,4 +1,4 @@
-let UniversitiesLoader = require('./controllers/universities-loader/UniversitiesLoader')
+let UniversitiesLoader = require('./services/universities-loader/UniversitiesLoader')
 let Odm = require('./model/Odm')
 let Routes = require('./routes/Routes')
 

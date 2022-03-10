@@ -1,7 +1,7 @@
 'use strict'
 module.exports = class Routes {
   constructor() {
-    this._universitiesManeger = require('../controllers/universities-manager/UniversitiesManager')
+    this._universitiesManeger = require('../services/universities-manager/UniversitiesManager')
     this._express = require('express')
     this._router = this._express.Router()
     this._app
