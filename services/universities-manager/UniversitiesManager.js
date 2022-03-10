@@ -55,14 +55,7 @@ module.exports = class UniversitiesManager {
   getUniversitieById = async (id) => {
     const result = await this._model.find({_id: id})
     if(result.length === 0) return {info: '0 Documents finded for this ID'}
-    return this._deleteUnusedFields(result[0])
-  }
-
-  _deleteUnusedFields = (universityData) => {
-    delete universityData.createdAt
-    delete universityData.updatedAt
-    delete universityData.__v
-    return universityData
+    return result[0]
   }
 
   deleteUniversity = async (id) => {
@@ -99,8 +92,9 @@ module.exports = class UniversitiesManager {
     desiredObj['state-province']
   })
 
-  updateUniversity = async ({id, desiredObj}) => {
-    const result = await this._model.findByIdAndUpdate(id, desiredObj)
+  updateUniversity = async ({id, receivedObj}) => {
+    const {web_pages, name, domains} = receivedObj
+    const result = await this._model.findByIdAndUpdate(id, {web_pages, name, domains})
     return result ? {success: true} : {info: '0 Documents finded for this ID'}
   }
 }

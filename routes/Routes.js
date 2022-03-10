@@ -71,7 +71,7 @@ module.exports = class Routes {
     this._router.put('/:id', async (req, res) => {
       try {
         const id = req.params.id 
-        return res.send(await this._universitiesManeger.updateUniversity({id, desiredObj: req.body}))
+        return res.send(await this._universitiesManeger.updateUniversity({id, receivedObj: req.body}))
       } catch (error) {
         const response = {
           error,
