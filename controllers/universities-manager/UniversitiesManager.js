@@ -11,6 +11,7 @@ module.exports = class UniversitiesManager {
       queryResult = await this._model.find(this._getInsensitiveQuery(country))
     else
       queryResult = await this._model.find(this._getInsensitiveQuery(country)).limit(20)
+    if(result.length === 0) return {info: '0 Documents finded for this country'}
     return queryResult.map(university => {
       return this._getDataTransferObject(university)
     })
@@ -46,6 +47,7 @@ module.exports = class UniversitiesManager {
 
   getUniversitieById = async (id) => {
     const result = await this._model.find({_id: id})
+    if(result.length === 0) return {info: '0 Documents finded for this ID'}
     return this._getDataTransferObject(result[0])
   }
 }

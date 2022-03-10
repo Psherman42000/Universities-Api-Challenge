@@ -40,19 +40,31 @@ module.exports = class Routes {
 
   _loadRoutesToCreations = () => {
     this._router.post('', async (req, res) => {
-      
+      try {
+        
+      } catch (error) {
+        res.sendStatus(500)
+      }
     })
   }
 
   _loadDeleteToDeletions = () => {
     this._router.delete('', async (req, res) => {
-      
+      try {
+        
+      } catch (error) {
+        res.sendStatus(500)
+      }
     })
   }
 
   _loadRoutesToUpdates = () => {
     this._router.put('', async (req, res) => {
-          
+      try {
+        
+      } catch (error) {
+        res.sendStatus(500)
+      }
     })
   }
 
@@ -63,18 +75,26 @@ module.exports = class Routes {
 
   _loadGetRoute = () => {
     this._router.get('', async (req, res) => {
-      const {country, allRecords} = req.query
-      if(country) {
-        return res.send(await this._universitiesManeger.getUniversitiesFromCountry({ country, allRecords }))
+      try{
+        const {country, allRecords} = req.query
+        if(country) {
+          return res.send(await this._universitiesManeger.getUniversitiesFromCountry({ country, allRecords }))
+        }
+        return res.send(await this._universitiesManeger.getUniversities({ allRecords }))
+      } catch (error) {
+        res.sendStatus(500)
       }
-      return res.send(await this._universitiesManeger.getUniversities({ allRecords }))
     })
   }
 
   _loadGetByIdRoute = () => {
     this._router.get('/:id', async (req, res) => {
-      const id = req.params.id
-      res.send(await this._universitiesManeger.getUniversitieById(id))
+      try {
+        const id = req.params.id
+        res.send(await this._universitiesManeger.getUniversitieById(id))
+      } catch (error) {
+        res.sendStatus(500)
+      }
     })
   }
 
