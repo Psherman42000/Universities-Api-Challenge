@@ -43,27 +43,29 @@ module.exports = class Routes {
       try {
         
       } catch (error) {
-        res.sendStatus(500)
+        return res.sendStatus(500)
       }
     })
   }
 
   _loadDeleteToDeletions = () => {
-    this._router.delete('', async (req, res) => {
+    this._router.delete('/:id', async (req, res) => {
       try {
-        
+        const id = req.params.id
+        return res.send(await this._universitiesManeger.deleteUniversity(id))
       } catch (error) {
-        res.sendStatus(500)
+        return res.sendStatus(500)
       }
     })
   }
 
   _loadRoutesToUpdates = () => {
-    this._router.put('', async (req, res) => {
+    this._router.put('/:id', async (req, res) => {
       try {
-        
+        const id = req.params.id 
+        return res.send(await this._universitiesManeger.updateUniversity({id, desiredObj: req.body}))
       } catch (error) {
-        res.sendStatus(500)
+        return res.sendStatus(500)
       }
     })
   }
@@ -82,7 +84,7 @@ module.exports = class Routes {
         }
         return res.send(await this._universitiesManeger.getUniversities({ allRecords }))
       } catch (error) {
-        res.sendStatus(500)
+        return res.sendStatus(500)
       }
     })
   }
@@ -91,9 +93,9 @@ module.exports = class Routes {
     this._router.get('/:id', async (req, res) => {
       try {
         const id = req.params.id
-        res.send(await this._universitiesManeger.getUniversitieById(id))
+        return res.send(await this._universitiesManeger.getUniversitieById(id))
       } catch (error) {
-        res.sendStatus(500)
+        return res.sendStatus(500)
       }
     })
   }
