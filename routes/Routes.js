@@ -57,12 +57,24 @@ module.exports = class Routes {
   }
 
   _loadRoutesToSearch = () => {
+    this._loadGetRoute()
+    this._loadGetByIdRoute()
+  }
+
+  _loadGetRoute = () => {
     this._router.get('', async (req, res) => {
       const {country, allRecords} = req.query
       if(country) {
         return res.send(await this._universitiesManeger.getUniversitiesFromCountry({ country, allRecords }))
       }
       return res.send(await this._universitiesManeger.getUniversities({ allRecords }))
+    })
+  }
+
+  _loadGetByIdRoute = () => {
+    this._router.get('/:id', async (req, res) => {
+      const id = req.params.id
+      res.send(await this._universitiesManeger.getUniversitieById(id))
     })
   }
 
