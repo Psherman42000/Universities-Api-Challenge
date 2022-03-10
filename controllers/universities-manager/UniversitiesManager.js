@@ -56,6 +56,35 @@ module.exports = class UniversitiesManager {
     return result ? {success: true} : {info: '0 Documents finded for this ID'}
   }
 
+  createUniversity = async ({desiredObj}) => {
+    if(await this._universityAlreadyExists(desiredObj)) return {error: 'University already exists'}
+    const result = await this._model.create(desiredObj)
+    return result ? {success: true} : {Error: 'Error trying create university'}
+  }
+
+  _universityAlreadyExists = async (desiredObj) => {
+    const result = await this._model.find(this._getMutifieldInsensitiveQuery(desiredObj))
+    if(result.length === 0) return false
+    return true
+  }
+
+  _getMutifieldInsensitiveQuery = (desiredObj) => ({
+    name: {
+      "$regex": desiredObj.name,
+      "$options": "i"
+    },
+    country: {
+      "$regex": desiredObj.country,
+      "$options": "i"
+    },
+    'state-province': desiredObj['state-province'] ? 
+    {
+      "$regex": desiredObj['state-province'],
+      "$options": "i"
+    } :
+    desiredObj['state-province']
+  })
+
   updateUniversity = async ({id, desiredObj}) => {
     const result = await this._model.findByIdAndUpdate(id, desiredObj)
     return result ? {success: true} : {info: '0 Documents finded for this ID'}

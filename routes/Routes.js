@@ -41,9 +41,13 @@ module.exports = class Routes {
   _loadRoutesToCreations = () => {
     this._router.post('', async (req, res) => {
       try {
-        
+        return res.send(await this._universitiesManeger.createUniversity({desiredObj: req.body}))
       } catch (error) {
-        return res.sendStatus(500)
+        const response = {
+          error,
+          success: false
+        }
+        return res.send(response)
       }
     })
   }
@@ -54,7 +58,11 @@ module.exports = class Routes {
         const id = req.params.id
         return res.send(await this._universitiesManeger.deleteUniversity(id))
       } catch (error) {
-        return res.sendStatus(500)
+        const response = {
+          error,
+          success: false
+        }
+        return res.send(response)
       }
     })
   }
@@ -65,7 +73,11 @@ module.exports = class Routes {
         const id = req.params.id 
         return res.send(await this._universitiesManeger.updateUniversity({id, desiredObj: req.body}))
       } catch (error) {
-        return res.sendStatus(500)
+        const response = {
+          error,
+          success: false
+        }
+        return res.send(response)
       }
     })
   }
@@ -84,7 +96,11 @@ module.exports = class Routes {
         }
         return res.send(await this._universitiesManeger.getUniversities({ allRecords }))
       } catch (error) {
-        return res.sendStatus(500)
+        const response = {
+          error,
+          success: false
+        }
+        return res.send(response)
       }
     })
   }
@@ -95,7 +111,11 @@ module.exports = class Routes {
         const id = req.params.id
         return res.send(await this._universitiesManeger.getUniversitieById(id))
       } catch (error) {
-        return res.sendStatus(500)
+        const response = {
+          error,
+          success: false
+        }
+        return res.send(response)
       }
     })
   }
