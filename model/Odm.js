@@ -61,7 +61,7 @@ module.exports = class Odm {
   insertMany = async (data) => {
     await this.initializeDb()
     const model = this._model ? this._model : this._createModel()
-    return await model.create(data)
+    return await model.insertMany(data)
   }
 
   getModel = async () => {
