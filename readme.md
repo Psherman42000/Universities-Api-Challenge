@@ -23,4 +23,33 @@
 
 -   **EXECUTANDO**
     -   Para iniciar o servidor de o comando '**node index.js**' na pasta raiz do projeto
-    -   (OBS: não se esqueça de executar o **npm i** antes) 
+    -   (OBS: não se esqueça de executar o **npm i** antes)
+
+-   **EXEMPLOS DE REQUISISÃO**
+    -   **GET**
+        -   **REQUISIÇÃO**
+            -   [http://localhost:3001/universities?page=1&registriesPerPage=5](http://localhost:3001/universities?page=1&registriesPerPage=5)
+        -   **RESPOSTA**
+            -   ![*](./readme-examples/get.png)
+    -   **GET BY ID**
+        -   **REQUISIÇÃO**
+            -   [http://localhost:3001/universities/622f6c7472a6da30d46dae98](http://localhost:3001/universities/622f6c7472a6da30d46dae98)
+        -   **RESPOSTA**
+            -   ![*](./readme-examples/get-by-id.png)
+    -   **POST**
+        -   **REQUISIÇÃO**
+            -   [http://localhost:3001/universities](http://localhost:3001/universities)
+            -   ![JSON](./readme-examples/post-json-req.png)
+        -   **RESPOSTA**
+            -   ![*](./readme-examples/post.png)
+    -   **PUT**
+        -   **REQUISIÇÃO**
+            -   [http://localhost:3001/universities/622f6c7472a6da30d46dae98](http://localhost:3001/universities/622f6c7472a6da30d46dae98)
+            -   ![JSON](./readme-examples/put-json-req.png)
+        -   **RESPOSTA**
+            -   ![*](./readme-examples/post.png)
+    -   **DELETE**
+        -   **REQUISIÇÃO**
+            -   [http://localhost:3001/universities/622f6c7472a6da30d46dae98](http://localhost:3001/universities/622f6c7472a6da30d46dae98)
+        -   **RESPOSTA**
+            -   ![*](./readme-examples/post.png)
