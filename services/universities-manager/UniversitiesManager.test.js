@@ -68,11 +68,11 @@ test('It should test if the UniversitiesManager.createUniversity method', async 
 })
 
 test('It should test if the UniversitiesManager.updateUniversity method', async () => {
-  const desiredObj = {
+  const receivedObj = {
     name: 'testName',
     web_pages: [],
     domains: [],
   }
   const id = mockedData._id
-  expect(await systemUnderTest.updateUniversity({id, ...desiredObj})).toStrictEqual({success: true})
+  expect(await systemUnderTest.updateUniversity({id, receivedObj})).toStrictEqual({success: true})
 })
